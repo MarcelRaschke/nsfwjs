@@ -77,12 +77,14 @@ const img = document.getElementById('img')
 
 // Load model from my S3.
 // See the section hosting the model files on your site.
-nsfwjs.load().then(function (model) {
-  model.classify(img).then(function (predictions) {
+nsfwjs.load()
+  .then(function (model) {
     // Classify the image
+    return model.classify(img)
+  })
+  .then(function (predictions) {
     console.log('Predictions: ', predictions)
   })
-})
 ```
 
 ## Library API
@@ -111,6 +113,14 @@ Model example - [Graph](https://github.com/infinitered/nsfwjs/tree/master/exampl
 
 ```js
 const model = nsfwjs.load('/path/to/different/model/', { type: 'graph' })
+```
+
+If you're using in the browser and you'd like to subsequently load from indexed db or local storage you can save the underlying model using the appropriate scheme and load from there.
+
+```js
+const initialLoad = await nsfwjs.load('/path/to/different/model')
+await initialLoad.model.save('indexeddb://model')
+const model = await nsfwjs.load('indexeddb://model')
 ```
 
 **Parameters**
@@ -310,7 +320,7 @@ const load_model = async () => {
 // Keep the model in memory, make sure it's loaded only once
 load_model().then(() => app.listen(8080))
 
-// curl --request POST localhost:8080/nsfw --header 'Content-Type: multipart/form-data --data-binary 'image=@/full/path/to/picture.jpg'
+// curl --request POST localhost:8080/nsfw --header 'Content-Type: multipart/form-data' --data-binary 'image=@/full/path/to/picture.jpg'
 ```
 
 You can also use [`lovell/sharp`](https://github.com/lovell/sharp) for preprocessing tasks and more file formats.
@@ -322,6 +332,12 @@ You can also use [`lovell/sharp`](https://github.com/lovell/sharp) for preproces
 It is currently available for Chrome and Firefox and is completely open-source.
 
 Check out the project [here](https://github.com/navendu-pottekkat/nsfw-filter).
+
+## Learn TensorFlow.js
+
+Learn how to write your own library like NSFWJS with my O'Reilly book "Learning TensorFlow.js" available on [O'Reilly](https://learning.oreilly.com/library/view/learning-tensorflowjs/9781492090786/) and [Amazon](https://amzn.to/3dR3vpY).
+
+[![Learning TensorFlow.js JavaScript Book Red](_art/red_mockup_top.jpg)](https://amzn.to/3dR3vpY)
 
 ## More!
 
@@ -369,6 +385,10 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <td align="center"><a href="https://qwertyforce.ru"><img src="https://avatars0.githubusercontent.com/u/44163887?v=4" width="100px;" alt=""/><br /><sub><b>qwertyforce</b></sub></a><br /><a href="https://github.com/infinitered/nsfwjs/commits?author=qwertyforce" title="Documentation">📖</a></td>
     <td align="center"><a href="https://github.com/YegorZaremba"><img src="https://avatars3.githubusercontent.com/u/31797554?v=4" width="100px;" alt=""/><br /><sub><b>Yegor <3</b></sub></a><br /><a href="https://github.com/infinitered/nsfwjs/commits?author=YegorZaremba" title="Code">💻</a> <a href="https://github.com/infinitered/nsfwjs/commits?author=YegorZaremba" title="Tests">⚠️</a></td>
     <td align="center"><a href="http://navendu.me"><img src="https://avatars1.githubusercontent.com/u/49474499?v=4" width="100px;" alt=""/><br /><sub><b>Navendu Pottekkat</b></sub></a><br /><a href="https://github.com/infinitered/nsfwjs/commits?author=navendu-pottekkat" title="Documentation">📖</a></td>
+    <td align="center"><a href="https://github.com/VladStepanov"><img src="https://avatars0.githubusercontent.com/u/49880862?v=4" width="100px;" alt=""/><br /><sub><b>Vladislav</b></sub></a><br /><a href="https://github.com/infinitered/nsfwjs/commits?author=VladStepanov" title="Code">💻</a> <a href="https://github.com/infinitered/nsfwjs/commits?author=VladStepanov" title="Documentation">📖</a></td>
+    <td align="center"><a href="https://github.com/nacht42"><img src="https://avatars1.githubusercontent.com/u/37903575?v=4" width="100px;" alt=""/><br /><sub><b>Nacht</b></sub></a><br /><a href="https://github.com/infinitered/nsfwjs/commits?author=nacht42" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/kateinkim"><img src="https://avatars.githubusercontent.com/u/53795920?v=4" width="100px;" alt=""/><br /><sub><b>kateinkim</b></sub></a><br /><a href="https://github.com/infinitered/nsfwjs/commits?author=kateinkim" title="Code">💻</a> <a href="https://github.com/infinitered/nsfwjs/commits?author=kateinkim" title="Documentation">📖</a></td>
+    <td align="center"><a href="https://janpoonthong.github.io/portfolio/"><img src="https://avatars.githubusercontent.com/u/56725335?v=4" width="100px;" alt=""/><br /><sub><b>jan</b></sub></a><br /><a href="https://github.com/infinitered/nsfwjs/commits?author=JanPoonthong" title="Documentation">📖</a></td>
   </tr>
 </table>
 
