@@ -15,13 +15,16 @@
     "react-webcam": "^1.1.0",
     "seedrandom": "^3.0.1",
     "tether-drop": "^1.4.2",
-    "victory": "^32.1.0"
+    "victory": "^32.1.0",
+    "@snyk/protect": "latest"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "prepare": "yarn run snyk-protect",
+    "snyk-protect": "snyk-protect"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -31,5 +34,6 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "snyk": true
 }
