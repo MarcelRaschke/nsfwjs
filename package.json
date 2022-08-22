@@ -14,14 +14,17 @@
     "contributors:generate": "all-contributors generate",
     "prep": "yarn && yarn build && cd example/nsfw_demo/ && yarn add ../../ && cd -",
     "scriptbundle": "browserify ./dist/nsfwjs.js --standalone nsfwjs --outfile ./dist/bundle.js",
-    "minbundle": "terser dist/bundle.js --compress --mangle --output dist/nsfwjs.min.js"
+    "minbundle": "terser dist/bundle.js --compress --mangle --output dist/nsfwjs.min.js",
+    "prepare": "yarn run snyk-protect",
+    "snyk-protect": "snyk-protect"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/infinitered/nsfwjs.git"
   },
   "dependencies": {
-    "@nsfw-filter/gif-frames": "1.0.2"
+    "@nsfw-filter/gif-frames": "1.0.2",
+    "@snyk/protect": "latest"
   },
   "peerDependencies": {
     "@tensorflow/tfjs": "^2.6.0"
@@ -33,16 +36,16 @@
     "babel-core": "^6.26.0",
     "babel-plugin-transform-runtime": "~6.23.0",
     "browserify": "^17.0.0",
-    "doctoc": "^1.4.0",
+    "doctoc": "^2.2.0",
     "jest": "^25.2.1",
-    "jpeg-js": "^0.4.0",
-    "node-fetch": "^2.3.0",
-    "np": "^5.0.0",
+    "jpeg-js": "^0.4.4",
+    "node-fetch": "^2.6.7",
+    "np": "^6.0.0",
     "seedrandom": "~3.0.3",
     "ts-jest": "^25.2.1",
     "ts-node": "~8.10.1",
     "tslint": "~6.1.0",
-    "terser": "^5.3.8",
+    "terser": "^5.14.2",
     "typescript": "3.9.7"
   },
   "keywords": [
@@ -59,5 +62,6 @@
   "bugs": {
     "url": "https://github.com/infinitered/nsfwjs/issues"
   },
-  "homepage": "https://nsfwjs.com"
+  "homepage": "https://nsfwjs.com",
+  "snyk": true
 }
